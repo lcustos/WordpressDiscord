@@ -1,5 +1,9 @@
 <?php
-
+/*
+Plugin Name: Notif Discord Plugin
+Description: This plugin send a discord message when a new comment is posted on a wordpress page
+Author: CUSTOS Lucas & MONRIBOT Lucas
+*/
 //Initialisation of all the options
 function create_option() {
     add_option( 'webhook' );
