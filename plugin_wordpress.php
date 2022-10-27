@@ -128,12 +128,13 @@ function menu_options() {
                     <?php esc_html_e( 'Langage', 'bot_lang' ); ?>
                 </h1>
                 <select name="langage">
-                    <option value="fr">Français</option>
+                    <option value="fr">French</option>
                     <option value="en">English</option>
-                    <option value="es">Español</option>
-                    <option value="de">Deutsch</option>
-                    <option value="it">Italiano</option>
-                    <option value="pt">Português</option>
+                    <option value="es">Spanish</option>
+                    <option value="de">German</option>
+                    <option value="it">Italian</option>
+                    <option value="pt">Portuguese</option>
+                    <option value="ja">Japanese</option>
                 </select>
                 <span style="font-size:16px"> Choose the langage of the notification.</span>
             </div>
