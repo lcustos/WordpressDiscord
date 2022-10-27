@@ -59,6 +59,8 @@ function discord_notif( $comment_ID, $comment_approved ) {
     }
 }
 add_action( 'comment_post', 'discord_notif', 10, 2 );
+
+
 //Admin Dashboard Menu
 function notification_admin_menu() {
     add_menu_page( 'Discord', 'Discord', 'manage_options', 'notifications-admin-menu-discord', 'menu_options', 'dashicons-bell', 2 );
