@@ -9,11 +9,27 @@ function create_option() {
     add_option( 'webhook' );
     add_option( 'bot_message' );
     add_option( 'bot_mention' );
+    add_option('bot_lang');
 }
 //function who translate in french with google translate
 
 function translateVF($text) {
     $url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=fr&dt=t&q=' . urlencode($text);
+    $handle = curl_init($url);
+    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($handle);
+    $responseDecoded = json_decode($response, true);
+    $translatedText = '';
+    foreach($responseDecoded[0] as $text) {
+        $translatedText .= $text[0];
+    }
+    return $translatedText;
+}
+
+//function who translate in the langage selected with google translate
+
+function TranslateV2($text, $lang) {
+    $url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl='.$lang.'&dt=t&q=' . urlencode($text);
     $handle = curl_init($url);
     curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($handle);
@@ -53,7 +69,7 @@ function discord_notif( $comment_ID, $comment_approved ) {
             "embeds" => [
                 [
                     "title" => "Comment sent in : " . get_the_title( $comment->comment_post_ID ),
-                    "description" => $bot_comment . ": " . translateVF($comment->comment_content),
+                    "description" => $bot_comment . ": " . TranslateV2($comment->comment_content, get_option( 'bot_lang' )),
                     "timestamp" => $timestamp,
                     "color" => hexdec( "b4ac57" ),
                     "author" => [
@@ -103,14 +119,28 @@ function menu_options() {
                 <select name="mention">
                     <option value="nothing">No one</option>
                     <option value="everyone">Everyone</option>
-                    <option value="abonnes">Abonnes</option>
                 </select>
                 <span style="font-size:16px"> Choose who will get the notification.</span>
+            </div>
+            <div>
+                // select the langage
+                <h1>
+                    <?php esc_html_e( 'Langage', 'bot_lang' ); ?>
+                </h1>
+                <select name="langage">
+                    <option value="fr">Français</option>
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="de">Deutsch</option>
+                    <option value="it">Italiano</option>
+                    <option value="pt">Português</option>
+                </select>
+                <span style="font-size:16px"> Choose the langage of the notification.</span>
             </div>
         </div>
         <br>
         <input type="submit" name="submit" value="Save Settings" class="button-primary">
-    <!-- Sete default values for the bot -->
+    <!-- Set default values for the bot -->
         <?php
         $webhookurl  = "";
         $bot_name    = "Jarvis";
@@ -123,6 +153,7 @@ function menu_options() {
             $bot_message = $_POST['bot_message'];
             $bot_author  = $_POST['bot_author'];
             $bot_mention = $_POST['mention'];
+            $bot_lang    = $_POST['langage'];
             echo "Settings save";
         }
         if ( $webhookurl != "" && $webhookurl != get_option( 'webhook' ) ) {
@@ -139,5 +170,8 @@ function menu_options() {
         }
         if ( $bot_mention != "" && $bot_mention != get_option( 'bot_mention' ) ) {
             $options = update_option( 'bot_mention', $bot_mention );
+        }
+        if ( $bot_lang != "" && $bot_lang != get_option( 'bot_lang' ) ) {
+            $options = update_option( 'bot_lang', $bot_lang );
         }
 }
