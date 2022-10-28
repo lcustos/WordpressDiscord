@@ -11,20 +11,6 @@ function create_option() {
     add_option( 'bot_mention' );
     add_option('bot_lang');
 }
-//function who translate in french with google translate
-
-function translateVF($text) {
-    $url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=fr&dt=t&q=' . urlencode($text);
-    $handle = curl_init($url);
-    curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
-    $response = curl_exec($handle);
-    $responseDecoded = json_decode($response, true);
-    $translatedText = '';
-    foreach($responseDecoded[0] as $text) {
-        $translatedText .= $text[0];
-    }
-    return $translatedText;
-}
 
 //function who translate in the langage selected with google translate
 
@@ -41,8 +27,8 @@ function TranslateV2($text, $lang) {
     return $translatedText;
 }
 
-
 register_activation_hook( __FILE__, 'create_option' );
+
 //Send to Discord
 function discord_notif( $comment_ID, $comment_approved ) {
     if ( 1 === $comment_approved ) {
@@ -71,7 +57,7 @@ function discord_notif( $comment_ID, $comment_approved ) {
                     "title" => "Comment sent in : " . get_the_title( $comment->comment_post_ID ),
                     "description" => $bot_comment . ": " . TranslateV2($comment->comment_content, get_option( 'bot_lang' )),
                     "timestamp" => $timestamp,
-                    "color" => hexdec( "b4ac57" ),
+                    "color" => hexdec( "0F00FF" ),
                     "author" => [
                         "name" => "Author" . " : " . ucfirst( $author ),
                     ],
