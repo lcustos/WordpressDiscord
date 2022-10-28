@@ -12,7 +12,7 @@ Voici un plugin pour recevoir sur Discord , les nouveaux commentaires mis sur vo
 
 - Télécharger le dossier du plugin
 
-  ![App Screenshot](https://i.postimg.cc/QNTvDKGs/Capture-d-cran-2022-01-27-11-44-12.png)
+  ![App Screenshot](https://i.postimg.cc/905S2MyX/image-2022-10-28-093013693.png)
 
 - Aller sur votre page administrateur Wordpress
 
@@ -26,7 +26,7 @@ Voici un plugin pour recevoir sur Discord , les nouveaux commentaires mis sur vo
 
 - Activer le plugin
 
-  ![App Screenshot](https://i.postimg.cc/9f2V2hY3/83-C98z-UNnq.png)
+  ![App Screenshot](https://i.postimg.cc/Rhg08jnR/image-2022-10-28-092829613.png)
 
 - Une fois activé, vous n'avez plus qu'à rentrer le ChatID de telegram et/ou le Webhook de votre serveur Discord et le tour est joué ! (À noter que tous les settings sont sauvegardés dans la database)
 
