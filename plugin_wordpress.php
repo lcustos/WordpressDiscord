@@ -42,9 +42,6 @@ function discord_notif( $comment_ID, $comment_approved ) {
             case "everyone":
                 $bot_content = '@everyone ' . $bot_content;
                 break;
-            case "abonnes":
-                $bot_content = '@abonnes ' . $bot_content;
-                break;
             default:
                 break;
         }
